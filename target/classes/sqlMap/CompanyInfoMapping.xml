@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.crawler.dao.CompanyDao">
+	<sql id="tableName">
+		t_company_info
+	</sql>
+  <resultMap type="com.study.crawler.entity.CompanyInfo" id="BaseResultMap">
+        <id column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="company_domain" property="companyDomain" jdbcType="VARCHAR"/>
+        <result column="developmental_phase" property="developmentalPhase" jdbcType="VARCHAR"/>
+        <result column="company_scale" property="companyScale" jdbcType="VARCHAR"/>
+        <result column="company_homepage" property="companyHomepage" jdbcType="VARCHAR"/>
+   </resultMap>
+
+
+    <insert id="insertCompanyInfo" parameterType="com.study.crawler.entity.CompanyInfo">
+    insert ignore into  
+ <include refid="tableName"></include> 
+(
+company_name,
+company_domain,
+developmental_phase,
+company_scale,
+company_homepage	
+)
+values(
+#{companyName},
+#{companyDomain},
+#{developmentalPhase},
+#{companyScale},
+#{companyHomepage}
+)
+    </insert>
+
+   <!--  <select id="getAllUser" resultMap="usermap">
+        select * from mybatis.user
+    </select>
+
+    <select id="getUserById" resultMap="usermap" parameterType="String">
+        select * from mybatis.user where userId= #{userId}
+    </select> -->
+
+
+  <!--   <update id="update" parameterType="com.elements.user.model.User">
+     update mybatis.user set UserName=#{UserName},
+     UserEmail=#{UserEmail}
+     where userId= #{userId}
+    </update>
+
+    <delete id="delete" parameterType="String">
+     delete mybatis.user where userId= #{userId}
+    </delete>
+ -->
+</mapper>

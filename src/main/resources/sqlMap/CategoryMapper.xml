@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.crawler.dao.CategoryDao">
+
+	<sql id="tablename">
+		t_category_info
+	</sql>
+
+	<resultMap id="BaseResultMap" type="com.study.crawler.entity.CategoryInfo">
+	
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="category_hierarchy_number" property="categoryHierarchyNumber"
+			jdbcType="VARCHAR" />	
+		<result column="is_leaf_category" property="isLeafCategory"
+			jdbcType="VARCHAR" />
+		<result column="category_hierarchy" property="categoryHierarchy"
+			jdbcType="VARCHAR" />
+		<result column="category_last" property="categoryLast"
+			jdbcType="VARCHAR" />
+		<result column="category_kind" property="categoryKind"
+			jdbcType="VARCHAR" />	
+		<result column="category_url" property="categoryUrl"
+			jdbcType="VARCHAR" />		
+	</resultMap>
+
+	<insert id="insertCategoryInfo" useGeneratedKeys="true" 
+		parameterType="com.study.crawler.entity.CategoryInfo">
+		insert ignore into
+		<include refid="tablename" />
+		(
+		category_name,
+		category_hierarchy_number,
+		is_leaf_category,
+		category_hierarchy,
+		category_last,
+		category_kind,
+		category_url,
+		source
+
+		)
+		values(
+		#{categoryName},
+		#{categoryHierarchyNumber},
+		#{isLeafCategory},
+		#{categoryHierarchy},
+		#{categoryLast},
+		#{categoryKind},
+		#{categoryUrl},
+		#{source}
+
+		)
+	</insert>
+
+	<insert id="createUmengInfoByBatch" useGeneratedKeys="true"
+		parameterType="java.util.List">
+
+		insert ignore into
+		<include refid="tablename" />
+		(
+	
+		category_name,
+		is_leaf_category,
+		category_hierarchy,
+		category_last,
+		category_kind,
+		category_url,
+		source
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+		
+			#{categoryName},
+			#{isLeafCategory},
+			#{categoryHierarchy},
+			#{categoryLast},
+			#{categoryKind},
+			#{categoryUrl},
+			#{source}
+			)
+		</foreach>
+	</insert>
+
+</mapper>

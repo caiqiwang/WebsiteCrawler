@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.crawler.dao.RecruitmentInfoDao">
+	
+	<sql id="tablename">
+		t_recruitment_info
+	</sql>
+
+	<resultMap id="BaseResultMap"
+		type="com.study.crawler.entity.RecruitmentInfo">
+		<result column="Department_info" property="DepartmentInfo" jdbcType="VARCHAR" />
+		<result column="position_info" property="positionInfo" jdbcType="VARCHAR" />
+		<result column="pay_info" property="payInfo" jdbcType="VARCHAR" />
+		<result column="place_info" property="placeInfo" jdbcType="VARCHAR" />
+		<result column="workExperience_info" property="workExperienceInfo" jdbcType="VARCHAR" />
+		<result column="education_info" property="educationInfo" jdbcType="VARCHAR" />
+		<result column="jobCategory_info" property="jobCategoryInfo" jdbcType="VARCHAR" />
+		<result column="jobLable_info" property="jobLableInfo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertRecruitmetInfo" useGeneratedKeys="true"
+		 parameterType="com.study.crawler.entity.RecruitmentInfo">
+		insert ignore into
+		<include refid="tablename" />
+		(
+		Department_info,
+		position_info,
+		pay_info,
+		place_info,
+		workExperience_info,
+		education_info,
+		jobCategory_info,
+		jobLable_info,
+		releaseTime,
+		PositionTheTemptation,
+		jobDescription,
+		workPlace,
+		jobPromulgator,
+		chatWith,
+		ResumeProcessing,
+		ActivePeriodOfTime,
+		interviewAppraisal,
+		workUrl
+		)
+		values(
+		#{DepartmentInfo},
+		#{positionInfo},
+		#{payInfo},
+		#{placeInfo},
+		#{workExperienceInfo},
+		#{educationInfo},
+		#{jobCategoryInfo},
+		#{jobLableInfo},
+		#{releaseTime},
+		#{PositionTheTemptation},
+		#{jobDescription},
+		#{workPlace},
+		#{jobPromulgator},
+		#{chatWith},
+		#{ResumeProcessing},
+		#{ActivePeriodOfTime},
+		#{interviewAppraisal},
+		#{workUrl}
+		)
+	</insert>
+
+	<insert id="createUmengInfo" useGeneratedKeys="true"
+		parameterType="java.util.List">
+
+		insert ignore into
+		<include refid="tablename" />
+		(
+		book_id,
+		book_name,
+		book_status,
+		book_author,
+		book_type,
+		book_category_id,
+		book_update_time,
+		book_source,
+		book_introduce,
+		good_aount
+		
+		)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=","> 
+			(
+		#{bookId},
+		#{bookName},
+		#{bookStatus},
+		#{bookAuthor},
+		#{bookType},
+		#{bookCategoryId},
+		#{bookUpdateTime},
+		#{bookSourcr},
+		#{bookIntroduce},
+		#{gooddAount}
+	
+			)
+		</foreach> 
+	</insert>
+
+
+
+</mapper>
