@@ -10,13 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.study.crawler.category.WebsiteCategory;
 import com.study.crawler.category.abstracts.impl.LagouCategoryImpl;
 import com.study.crawler.details.abstracts.impl.LagouDetailImpl;
 import com.study.crawler.lists.abstracts.impl.LagouListImpl;
 
 @Service
-public class CrawlerFactory {
+public class LagouCrawlerFactory {
 	@Value("${com.study.ThreadNumber}")
 	public int number;
 
@@ -27,8 +26,7 @@ public class CrawlerFactory {
 		ExecutorService service = Executors.newCachedThreadPool();
 		AtomicInteger atomic = new AtomicInteger(0);
 		//
-		WebsiteCategory websiteCategory = new LagouCategoryImpl();
-		categoryQueue = websiteCategory.getWebsiteCategory();
+		new LagouCategoryImpl(categoryQueue);
 		System.out.println("分类信息获取完毕 url总数为 ：" + categoryQueue.size());
 		for (int i = 0; i < number; i++) {
 			new LagouListImpl(categoryQueue, listQueue, service, atomic);

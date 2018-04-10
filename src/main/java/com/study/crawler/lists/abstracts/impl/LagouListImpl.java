@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.small.crawler.util.document.CrawlParam;
 import com.small.crawler.util.document.HttpURLConnectionFactory;
@@ -22,6 +24,7 @@ public class LagouListImpl extends WebsiteListAbstracts {
 		// System.out.println(a);
 	
 	}*/
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public LagouListImpl(BlockingQueue<String> categoryQueue, BlockingQueue<String> listQueue, ExecutorService service,
 			AtomicInteger atomic) {

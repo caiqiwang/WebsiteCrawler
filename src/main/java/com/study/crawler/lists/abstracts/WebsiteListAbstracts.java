@@ -1,5 +1,7 @@
 package com.study.crawler.lists.abstracts;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,6 +13,9 @@ public abstract class WebsiteListAbstracts implements WebsiteList, Runnable {
 	protected BlockingQueue<String> listQueue;// 存储每个分类下的所有详情url
 	protected ExecutorService service;
 	protected AtomicInteger atomic;
+	// 单线程使用
+	protected List<String> list;
+	protected Set<String> set;
 
 	public WebsiteListAbstracts(BlockingQueue<String> categoryQueue, BlockingQueue<String> listQueue,
 			ExecutorService service, AtomicInteger atomic) {
@@ -18,6 +23,11 @@ public abstract class WebsiteListAbstracts implements WebsiteList, Runnable {
 		this.listQueue = listQueue;
 		this.service = service;
 		this.atomic = atomic;
+	}
+
+	public WebsiteListAbstracts(Set<String> set) {// 该构造方法用于单线程
+
+		this.set = set;
 	}
 
 	public WebsiteListAbstracts() {

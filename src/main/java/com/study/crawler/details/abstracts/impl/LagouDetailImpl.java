@@ -8,6 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.small.crawler.util.DateTimeUtil;
 import com.small.crawler.util.document.CrawlParam;
@@ -23,6 +25,7 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 	private CompanyManagerImpl campanyImpl = ApplicationContextSave.getBean(CompanyManagerImpl.class);
 	private RecruitmentInfoManagerImpl recruitmentInfoImpl = ApplicationContextSave
 			.getBean(RecruitmentInfoManagerImpl.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public LagouDetailImpl(BlockingQueue<String> listQueue, ExecutorService service, AtomicInteger atomic, int number) {
 		super(listQueue, service, atomic, number);
@@ -38,8 +41,8 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 		String url = "https://www.lagou.com/jobs/4347782.html";// 没有 hr 相关信息
 		String url2 = "https://www.lagou.com/jobs/4223542.html";// 没有公司主页
 		String url3 = "https://www.lagou.com/jobs/4377221.html";
-		impl.getRecruitmentInfo(url3);
-		// impl.getCompanyInfo(url3);
+		// impl.getRecruitmentInfo(url3);
+		impl.getCompanyInfo(url3);
 		// impl.getMSInfo(url);
 	}
 
@@ -56,6 +59,8 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 	 */
 	@Override
 	public CompanyInfo getCompanyInfo(String detailUrl) {
+		// logger.info("info: loggerinfo");
+		// logger.debug("debug");
 		CompanyInfo companyInfo = new CompanyInfo();
 		CrawlParam crawlParam = new CrawlParam();
 		crawlParam.setUrlStr(detailUrl);

@@ -3,7 +3,6 @@ package com.study.crawler.category.abstracts.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -16,20 +15,33 @@ import com.study.crawler.manager.impl.CategroyManagerImpl;
 import com.study.crawler.tool.ConstantUtil;
 import com.study.crawler.tool.DocumentUtil;
 
+import redis.clients.jedis.Jedis;
+
 @Service
 public class LagouCategoryImpl extends WebsiteCategoryAbstract {
 
+	public LagouCategoryImpl(BlockingQueue<String> categoryQueue) {
+		super(categoryQueue);
+	}
+
+	public LagouCategoryImpl(Jedis jedis) {
+		super(jedis);
+	}
+
+	/*public LagouCategoryImpl() {// 测试用 父类的构造方法也要删除
+	
+	}
+	
 	public static void main(String[] args) {
 		// BlockingQueue<String> categoryQueue = new
 		// LinkedBlockingQueue<String>();// 存储分类信息
 		LagouCategoryImpl lagouCategoryImpl = new LagouCategoryImpl();
 		lagouCategoryImpl.getWebsiteCategory();
-	}
+	}*/
 
-	public BlockingQueue<String> getWebsiteCategory() {
+	public void getWebsiteCategory() {
 		// TODO Auto-generated method stub
-		String homepageUrl = ConstantUtil.URL;
-		BlockingQueue<String> categoryQueue = new LinkedBlockingQueue<String>();// 存储分类信息
+		String homepageUrl = ConstantUtil.LAGOUURL;
 		CategoryInfo categoryInfo = new CategoryInfo();
 		categoryInfo.setSource("Lagou");
 		categoryInfo.setCategoryKind("work");
@@ -38,17 +50,17 @@ public class LagouCategoryImpl extends WebsiteCategoryAbstract {
 		Document document = DocumentUtil.getDocument(homepageUrl);
 		if (document == null) {
 			System.out.println("分类页面获取失败----");
-			return null;
+			return;
 		}
 		Elements elements = document.select("div[class=clearfix]");
 		if (elements == null) {
 			System.out.println("分类  - 进入第一层级div失败----");
-			return null;
+			return;
 		}
 		elements = elements.select("div[class=mainNavs]");
 		if (elements == null) {
 			System.out.println("分类  - 进入第2层级div失败----");
-			return null;
+			return;
 		}
 		// 进入正式分类div
 		// 用来存储一级分类的name
@@ -57,7 +69,7 @@ public class LagouCategoryImpl extends WebsiteCategoryAbstract {
 		String firstCategoryName = null;
 		// 2级分类
 		String SecondCategoryName = null;
-		// 2级分类
+		// 3级分类
 		String ThirdCategoryName = null;
 		// 分类的url
 		String CategoryUrl = null;
@@ -123,6 +135,5 @@ public class LagouCategoryImpl extends WebsiteCategoryAbstract {
 			}
 
 		}
-		return categoryQueue;
 	}
 }
