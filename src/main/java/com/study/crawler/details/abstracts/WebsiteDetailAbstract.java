@@ -1,5 +1,6 @@
 package com.study.crawler.details.abstracts;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,6 +14,7 @@ public abstract class WebsiteDetailAbstract implements WebsiteDetail, Runnable {
 	protected ExecutorService service;
 	protected AtomicInteger atomic;
 	protected int number;
+	protected List<String> list;// 用于导出到excel
 
 	public WebsiteDetailAbstract(BlockingQueue<String> listQueue, ExecutorService service, AtomicInteger atomic,
 			int number) {
@@ -20,6 +22,10 @@ public abstract class WebsiteDetailAbstract implements WebsiteDetail, Runnable {
 		this.service = service;
 		this.atomic = atomic;
 		this.number = number;
+	}
+
+	public WebsiteDetailAbstract(List<String> list) {
+		this.list = list;
 	}
 
 	public WebsiteDetailAbstract() {

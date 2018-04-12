@@ -6,7 +6,6 @@ import java.util.concurrent.BlockingQueue;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Service;
 
 import com.study.crawler.category.abstracts.WebsiteCategoryAbstract;
 import com.study.crawler.client.ApplicationContextSave;
@@ -17,7 +16,6 @@ import com.study.crawler.tool.DocumentUtil;
 
 import redis.clients.jedis.Jedis;
 
-@Service
 public class LagouCategoryImpl extends WebsiteCategoryAbstract {
 
 	public LagouCategoryImpl(BlockingQueue<String> categoryQueue) {

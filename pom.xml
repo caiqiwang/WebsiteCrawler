@@ -23,7 +23,7 @@
     </properties>
 
   <dependencies>
-  <!--本地maven项目 打包成jar 存到maven后 导入 -->
+  <!--本地maven项目 打包成jar 存到maven仓库后 导入 -->
  		<dependency>
   			<groupId>com.winbaoxian.bigdata.crawler</groupId>
 			<artifactId>small-spider</artifactId>
@@ -88,6 +88,11 @@
    			 <artifactId>jedis</artifactId>
    			 <version>2.9.0</version>
 		</dependency>
+
+
+
+   	 	 
+
    	 	 
   </dependencies>
    <build>

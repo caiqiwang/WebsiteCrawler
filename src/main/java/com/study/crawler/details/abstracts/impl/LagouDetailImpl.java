@@ -32,10 +32,10 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 		service.execute(this);
 	}
 
-	public LagouDetailImpl() {
-
+	/*public LagouDetailImpl() {
+	
 	}
-
+	
 	public static void main(String[] args) {
 		LagouDetailImpl impl = new LagouDetailImpl();
 		String url = "https://www.lagou.com/jobs/4347782.html";// 没有 hr 相关信息
@@ -44,7 +44,7 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 		// impl.getRecruitmentInfo(url3);
 		impl.getCompanyInfo(url3);
 		// impl.getMSInfo(url);
-	}
+	}*/
 
 	@Override
 	public void getWebsiteDetail(String detailUrl) {
