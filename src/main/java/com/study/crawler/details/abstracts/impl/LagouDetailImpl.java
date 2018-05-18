@@ -57,7 +57,7 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 	/* 传入详情页url
 	 * 用来获取公司信息
 	 */
-	@Override
+
 	public CompanyInfo getCompanyInfo(String detailUrl) {
 		// logger.info("info: loggerinfo");
 		// logger.debug("debug");
@@ -127,7 +127,6 @@ public class LagouDetailImpl extends WebsiteDetailAbstract {
 	/* 传入详情页url
 	 * 用来获取招聘信息
 	 */
-	@Override
 	public RecruitmentInfo getRecruitmentInfo(String detailUrl) {
 		RecruitmentInfo recruitmentInfo = new RecruitmentInfo();
 		CrawlParam crawlParam = new CrawlParam();

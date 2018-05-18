@@ -1,5 +1,6 @@
 package com.study.crawler.lists.abstracts.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.jsoup.nodes.Document;
@@ -23,8 +24,8 @@ public class JDListImpl extends WebsiteListAbstracts {
 	}
 
 	public static void main(String[] args) {
-		String url = "https://search.jd.com/search?keyword=%E7%94%B5%E5%AD%90%E7%83%9F&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&ev=exbrand_%E6%98%93%E6%98%9F%5E&uc=0#J_searchWrap"
-				+ "!易星";
+		String url = "https://search.jd.com/Search?keyword=Lumia&enc=utf-8&wq=Lumia&pvid=43d10f2aa27c41ec9d705f41277afce8"
+				+ "!Lumia";
 		JDListImpl impl = new JDListImpl();
 		impl.getWebsiteList(url);
 	}
@@ -62,17 +63,32 @@ public class JDListImpl extends WebsiteListAbstracts {
 					info = info.select("div[class=p-name p-name-type-2]");
 					info = info.select("a");
 					intro = info.select("em").text();// 判断是否卖这个品牌的电子烟
-					if (intro.indexOf(brand) > -1) {
+					if ((intro.indexOf(brand.toLowerCase()) > -1 || intro.indexOf(brand.toUpperCase()) > -1
+							|| intro.indexOf(brand) > -1) && intro.indexOf("电子烟") > -1 && intro.indexOf("保护膜") < 0
+							&& intro.indexOf("保护套") < 0) {
 						detailUrl = "https:" + info.attr("href") + "!" + brand;
-						set.add(detailUrl);
+						if (detailUrl.indexOf("404") < 0) {
+							// testSet.add(detailUrl);
+							set.add(detailUrl);
+						}
 					}
 				}
 			} else {
-				String nextUrl = newUrl.split("uc=0")[0] + "page=" + ((2 * i) + 1) + "&click=0";
+				// 判断是根据关键字搜索还是根据品牌
+				String nextUrl = "";
+				if (newUrl.indexOf("&wq") > 0) {
+					// 关键字
+					nextUrl = "https://search.jd.com/Search?keyword=mt&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=mt&page="
+							+ ((2 * i) + 1);
+				} else {
+					// 店铺搜索
+					nextUrl = newUrl.split("uc=0")[0] + "page=" + ((2 * i) + 1);
+				}
 				crawlParam.setUrlStr(nextUrl);
 				Document document = HttpURLConnectionFactory.getDocument(crawlParam);
 				if (document == null) {
 					logger.info("进入分类电子烟url失败 :" + str);
+					return;
 				}
 				Elements elements = document.select("div[class=ml-wrap]");
 				if (elements.size() == 0) {
@@ -88,17 +104,23 @@ public class JDListImpl extends WebsiteListAbstracts {
 					info = info.select("div[class=p-name p-name-type-2]");
 					info = info.select("a");
 					intro = info.select("em").text();// 判断是否卖这个品牌的电子烟
-					if (intro.indexOf(brand) > -1) {
+					if ((intro.indexOf(brand.toLowerCase()) > -1 || intro.indexOf(brand.toUpperCase()) > -1
+							|| intro.indexOf(brand) > -1) && intro.indexOf("电子烟") > -1 && intro.indexOf("保护膜") < 0
+							&& intro.indexOf("保护套") < 0) {
 						detailUrl = "https:" + info.attr("href") + "!" + brand;
-						set.add(detailUrl);
+						if (detailUrl.indexOf("404") < 0) {
+							// testSet.add(detailUrl);
+							set.add(detailUrl);
+						}
 					}
 				}
 			}
 
 		}
-
-		crawlParam.setUrlStr(newUrl);
-
+		/*System.out.println(testSet.size());
+		for (String url : testSet) {
+			System.out.println(url);
+		}*/
 	}
 
 	@Override
@@ -118,6 +140,12 @@ public class JDListImpl extends WebsiteListAbstracts {
 		elements = elements.select("i");
 		page = Integer.valueOf(elements.text());
 		return page;
+	}
+
+	@Override
+	public int getAllPage(String categoryUrl, List<String> list) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

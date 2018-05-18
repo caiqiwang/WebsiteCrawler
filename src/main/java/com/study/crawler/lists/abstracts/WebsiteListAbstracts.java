@@ -8,11 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.study.crawler.lists.WebsiteList;
 
+import redis.clients.jedis.Jedis;
+
 public abstract class WebsiteListAbstracts implements WebsiteList, Runnable {
 	protected BlockingQueue<String> categoryQueue;// 分类信息
 	protected BlockingQueue<String> listQueue;// 存储每个分类下的所有详情url
 	protected ExecutorService service;
 	protected AtomicInteger atomic;
+	protected Jedis jedis;// 用于数据存储到redis中
 	// 单线程使用
 	protected List<String> list;
 	protected Set<String> set;
@@ -28,6 +31,10 @@ public abstract class WebsiteListAbstracts implements WebsiteList, Runnable {
 	public WebsiteListAbstracts(Set<String> set) {// 该构造方法用于单线程
 
 		this.set = set;
+	}
+
+	public WebsiteListAbstracts(Jedis jedis) {
+		this.jedis = jedis;
 	}
 
 	public WebsiteListAbstracts() {
@@ -70,4 +77,6 @@ public abstract class WebsiteListAbstracts implements WebsiteList, Runnable {
 	}
 
 	public abstract int getAllPage(String categoryUrl);
+
+	public abstract int getAllPage(String categoryUrl, List<String> list);
 }

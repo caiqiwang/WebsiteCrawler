@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.crawler.dao.MFWInfoDao">
+	<sql id="tableName">
+		t_mfw_travel_info
+	</sql>
+	<resultMap type="com.study.crawler.entity.MFWTravelNotesInfo" id="BaseResultMap">
+		<result column="likeCount" property="likeCount" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="travelDetail" property="travelDetail" jdbcType="VARCHAR" />
+	</resultMap>
+<insert id="insertMFWInfo" parameterType="com.study.crawler.entity.MFWTravelNotesInfo">
+insert ignore into 
+<include refid="tableName"></include>
+(
+title,
+travelDetail,
+authorInfo,
+authorUrl,
+releaseTime,
+readQuantity,
+collect,
+shareNumber,
+likeCount,
+catalog,
+travelPlace,
+url
+)
+values(
+#{title},
+#{travelDetail},
+#{authorInfo},
+#{authorUrl},
+#{releaseTime},
+#{readQuantity},
+#{collect},
+#{shareNumber},
+#{likeCount},
+#{catalog},
+#{travelPlace},
+#{url}
+)
+
+</insert>
+
+
+</mapper>

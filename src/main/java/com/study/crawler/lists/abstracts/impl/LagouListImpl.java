@@ -1,5 +1,6 @@
 package com.study.crawler.lists.abstracts.impl;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -132,5 +133,11 @@ public class LagouListImpl extends WebsiteListAbstracts {
 			page = 2;
 		}
 		return page;
+	}
+
+	@Override
+	public int getAllPage(String categoryUrl, List<String> list) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

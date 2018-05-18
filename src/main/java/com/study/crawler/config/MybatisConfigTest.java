@@ -23,6 +23,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 @MapperScan(basePackages = "com.study.crawler.dao", sqlSessionTemplateRef = "spiderSqlSessionTemplate")
 public class MybatisConfigTest {
 	@Autowired
+	// @Qualifier("primaryDataSource")用来配置指定数据源
 	private DataSource dataSource;
 
 	@Bean(name = "spiderSqlSessionFactory")

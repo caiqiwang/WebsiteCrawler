@@ -6,15 +6,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.study.crawler.details.WebsiteDetail;
-import com.study.crawler.entity.CompanyInfo;
-import com.study.crawler.entity.RecruitmentInfo;
+import com.study.crawler.entity.CommodityInfo;
 
 public abstract class WebsiteDetailAbstract implements WebsiteDetail, Runnable {
 	protected BlockingQueue<String> listQueue;// 存储每个分类下的所有详情url
 	protected ExecutorService service;
 	protected AtomicInteger atomic;
 	protected int number;
-	protected List<String> list;// 用于导出到excel
+	protected List<CommodityInfo> list;// 用于导出到excel
 
 	public WebsiteDetailAbstract(BlockingQueue<String> listQueue, ExecutorService service, AtomicInteger atomic,
 			int number) {
@@ -24,7 +23,7 @@ public abstract class WebsiteDetailAbstract implements WebsiteDetail, Runnable {
 		this.number = number;
 	}
 
-	public WebsiteDetailAbstract(List<String> list) {
+	public WebsiteDetailAbstract(List<CommodityInfo> list) {
 		this.list = list;
 	}
 
@@ -60,10 +59,6 @@ public abstract class WebsiteDetailAbstract implements WebsiteDetail, Runnable {
 
 	public void getWebsiteDetail(String detailUrl) {
 		// TODO Auto-generated method stub
-
 	}
 
-	public abstract CompanyInfo getCompanyInfo(String detailUrl);
-
-	public abstract RecruitmentInfo getRecruitmentInfo(String detailUrl);
 }

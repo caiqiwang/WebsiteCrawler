@@ -3,6 +3,12 @@ package com.study.crawler.entity;
 public class CategoryInfo {// 分类信息表
 	public String categoryName; // 分类名
 	public String categoryHierarchyNumber;// 分类层级编号
+	public String categoryHierarchy;// 分类层级
+	public String categoryLast; // 上级分类
+	public String categoryUrl;// 分类url
+	public String categoryKind;// 分类类型
+	public String isLeafCategory;// 是否是最后的分类
+	public String source;// 来源
 
 	public String getCategoryName() {
 		return categoryName;
@@ -68,10 +74,4 @@ public class CategoryInfo {// 分类信息表
 		this.source = source;
 	}
 
-	public String categoryHierarchy;// 分类层级
-	public String categoryLast; // 上级分类
-	public String categoryUrl;// 分类url
-	public String categoryKind;// 分类类型
-	public String isLeafCategory;// 是否是最后的分类
-	public String source;// 来源
 }
