@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
-import com.small.crawler.util.CrawlerUtil;
 import com.small.crawler.util.document.CrawlParam;
 import com.small.crawler.util.document.HttpURLConnectionFactory;
 import com.study.crawler.details.abstracts.WebsiteDetailAbstract;
@@ -89,7 +88,8 @@ public class TianMaoDetail extends WebsiteDetailAbstract {
 		crawlParam.setUrlStr(allCountUrl);
 		String AllCountStr = HttpURLConnectionFactory.getDocumentStr(crawlParam);
 		if (AllCountStr != null) {
-			AllCountStr = CrawlerUtil.matchBetweenSymbol(AllCountStr, "jsonp202\\(", "\\)", true);
+			// AllCountStr = CrawlerUtil.matchBetweenSymbol(AllCountStr,
+			// "jsonp202\\(", "\\)", true);
 			System.out.println(AllCountStr.toString());
 			JSONObject AllCountJson = JSONObject.parseObject(AllCountStr);
 			AllCountJson = AllCountJson.getJSONObject("dsr");

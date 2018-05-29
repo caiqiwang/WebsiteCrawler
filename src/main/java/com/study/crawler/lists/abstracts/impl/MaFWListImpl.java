@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
-import com.small.crawler.util.CrawlerUtil;
 import com.small.crawler.util.document.CrawlParam;
 import com.small.crawler.util.document.HttpURLConnectionFactory;
 import com.study.crawler.lists.abstracts.WebsiteListAbstracts;
@@ -61,7 +60,8 @@ public class MaFWListImpl extends WebsiteListAbstracts {
 			logger.info("获取游记列表失败 url为" + JsonUrl + "分类url为：" + str);
 			return;
 		}
-		info = CrawlerUtil.matchBetweenSymbol(info, "jQuery123\\(", "\\)", true);
+		// info = CrawlerUtil.matchBetweenSymbol(info, "jQuery123\\(", "\\)",
+		// true);
 
 		JSONObject json = JSONObject.parseObject(info);
 		json = json.getJSONObject("data");

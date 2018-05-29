@@ -33,12 +33,16 @@ public class waibaoFactory {
 			System.out.println(detailSet.size());*/
 		/*String id = RegexUtil.matchNumber("http://jinhua.ganji.com/zpshichangyingxiao/2947857096x.htm");
 		System.out.println(id);*/
-		/*	String info = "没有找到合适的工作";
+		/*	String info = "合适的工作";
 			Jedis jedis = new Jedis("127.0.0.1", 6379);
 			jedis.auth("foobared");
 			CrawlParam crawlParams = new CrawlParam("http://shaoxing.ganji.com/zpdianhuaxiaoshou/");
 			ProxyUtil.getProxyPool(crawlParams, jedis, "ganjiProxy", info, "xici");*/
-		MarketPhoneSell.marketPhoneSellStart();
+
+		// MarketPhoneSell.marketPhoneSellStart();
+		List<String> excelList = new ArrayList<String>();
+		excelList.add("公司名;类型;联系人;联系电话");
+		ExcelUtil.exportExcel("E:\\excel\\ganji.xls", excelList, false);
 	}
 }
 

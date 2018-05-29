@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.small.crawler.util.CrawlerUtil;
 import com.small.crawler.util.document.CrawlParam;
 import com.small.crawler.util.document.HttpURLConnectionFactory;
 import com.study.crawler.details.abstracts.WebsiteDetailAbstract;
@@ -89,7 +88,8 @@ public class JDDetailImpl extends WebsiteDetailAbstract {
 				logger.info("获取评论信息失败 url：" + discussUrl);
 				return;
 			}
-			discussInfo = CrawlerUtil.matchBetweenSymbol(discussInfo, "vv20\\(", "\\)", true);
+			// discussInfo = CrawlerUtil.matchBetweenSymbol(discussInfo,
+			// "vv20\\(", "\\)", true);
 			// System.out.println(discussInfo.substring(discussInfo.length() -
 			// 106,
 			// discussInfo.length()));
@@ -145,7 +145,8 @@ public class JDDetailImpl extends WebsiteDetailAbstract {
 			crawlParam.setUrlStr(discussUrl);
 			crawlParam.setCharset("gbk");
 			String discussInfo = HttpURLConnectionFactory.getDocumentStr(crawlParam);
-			discussInfo = CrawlerUtil.matchBetweenSymbol(discussInfo, "6435654\\(", "\\)", true);
+			// discussInfo = CrawlerUtil.matchBetweenSymbol(discussInfo,
+			// "6435654\\(", "\\)", true);
 			JSONObject json = JSONObject.parseObject(discussInfo);
 			// 获取json中 根据 key 对应的json内容 返回值为json
 			JSONObject JSONCount = json.getJSONObject("productCommentSummary");
